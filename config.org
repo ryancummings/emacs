@@ -3,6 +3,9 @@
 #+LATEX_HEADER: \usepackage{parskip}
 #+LATEX_HEADER: \usepackage{inconsolata}
 #+LATEX_HEADER: \usepackage[utf8]{inputenc}
+* Intro
+Welcome to my config! Feel free to borrow anything you like. Quick tips below:
+- To edit a source block, it is best to pop open a code editor with =C-c '=
 * Todos
 ** TODO Prevent emacs from generating config.el file when loading
 * Bootstrap
@@ -826,12 +829,15 @@ the structure of the current major mode.
   ("C-." . er/expand-region))
 #+END_SRC
 ** Auto-fill
+I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could break document structure. 
 #+BEGIN_SRC emacs-lisp
-(use-package simple
-  :ensure nil
-  :hook
-  (prog-mode . turn-on-auto-fill)
-  (text-mode . turn-on-auto-fill))
+  (use-package simple
+    :ensure nil
+    :hook
+    ;; (prog-mode . turn-on-auto-fill)
+    ;; (text-mode . turn-on-auto-fill)
+    (text-mode . visual-line-mode)
+    )
 #+END_SRC
 
 * Programming
