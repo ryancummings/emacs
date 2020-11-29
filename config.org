@@ -839,7 +839,16 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
     (text-mode . visual-line-mode)
     )
 #+END_SRC
-
+** Projectile
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :ensure t
+    :init
+    (projectile-mode +1)
+    :bind (:map projectile-mode-map
+                ("s-p" . projectile-command-map)
+                ("C-c p" . projectile-command-map)))
+#+END_SRC
 * Programming
 ** Magit
 #+BEGIN_SRC emacs-lisp
@@ -1096,6 +1105,7 @@ HTML mode is defined in =sgml-mode.el=.
 #+END_SRC
 
 *** Python
+Setup for programming in Python
 #+BEGIN_SRC emacs-lisp
   (use-package python-mode
     :ensure nil
@@ -1121,6 +1131,15 @@ HTML mode is defined in =sgml-mode.el=.
     ;; :custom
     ;; (lsp-python-executable-cmd "python3")
     )
+#+END_SRC
+
+Set up auto-venv activation. To use, name the venv the same name as the project root directory
+#+BEGIN_SRC emacs-lisp
+  (use-package auto-virtualenvwrapper
+    :ensure t
+    )
+
+  (add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
 #+END_SRC
 
 * Org and LaTeX
