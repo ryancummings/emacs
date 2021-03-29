@@ -1191,14 +1191,14 @@ An extensible latex editor. Requires Tex Live.
   ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
   (org-capture-templates
    (quote (("t" "Todo" entry (file "~/org/inbox.org")
-            "* TODO %?\n"
+            "* TODO %?\n" :kill-buffer t
             )
            ("T" "Tickler (reminder)" entry (file+headline "~/org/schedule.org" "Tickler")
-            "* %?\nSCHEDULED: %^t")
+            "* %?\nSCHEDULED: %^t" :kill-buffer t)
            ("m" "Meeting" entry (file+headline "~/org/schedule.org" "Meetings")
-            "* TODO %?\nSCHEDULED: %^t")
+            "* TODO %?\nSCHEDULED: %^t" :kill-buffer t)
            ("n" "Note" entry (file "~/org/inbox.org")
-            "* %? :NOTE:\n%U\n")
+            "* %? :NOTE:\n%U\n" :kill-buffer t)
            ("g" "Groceries" item (file+headline "~/org/gtd.org" "Groceries")
             "- %?\n")
            ("b" "Buy" entry (file+headline "~/org/gtd.org" "Shopping inbox")
