@@ -849,6 +849,17 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
                 ("s-p" . projectile-command-map)
                 ("C-c p" . projectile-command-map)))
 #+END_SRC
+** IBuffer
+- Set up ibuffer filters here.
+- One for Dired to kill all dired buffers.
+#+BEGIN_SRC emacs-lisp
+(setq-default ibuffer-saved-filter-groups
+              `(("Default"
+                 ;; I create a group call Dired, which contains all buffer in dired-mode
+                 ("Dired" (mode . dired-mode))
+                 ("Temporary" (name . "\*.*\*"))
+                 )))
+#+END_SRC
 * Programming
 ** Magit
 #+BEGIN_SRC emacs-lisp
