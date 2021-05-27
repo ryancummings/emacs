@@ -860,6 +860,14 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
                  ("Temporary" (name . "\*.*\*"))
                  )))
 #+END_SRC
+** TRAMP
+- To access other devices on the local network, run all TRAMP traffic through kubotunnel. Work in progress.
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'tramp-default-proxies-alist
+               '("192.168.1.24" nil "/ssh:kubo@ryanwcummings.com#443:"))
+
+#+END_SRC
+
 * Programming
 ** Magit
 #+BEGIN_SRC emacs-lisp
