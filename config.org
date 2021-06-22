@@ -1136,29 +1136,6 @@ Setup for programming in Python
 
   (use-package pipenv
     :hook (python-mode . pipenv-mode))
-
-  (use-package py-autopep8
-    :hook 
-    (python-mode 'py-autopep8-enable-on-save)
-    :custom
-    (py-autopep8-options '("--max-line-length=100"))
-    )
-
-  (use-package lsp-python-ms
-    :after lsp-mode python
-    ;; :if (or *python3* *python*)
-    ;; :custom
-    ;; (lsp-python-executable-cmd "python3")
-    )
-#+END_SRC
-
-Set up auto-venv activation. To use, name the venv the same name as the project root directory
-#+BEGIN_SRC emacs-lisp
-  (use-package auto-virtualenvwrapper
-    :ensure t
-    )
-
-  (add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
 #+END_SRC
 
 * Org and LaTeX
