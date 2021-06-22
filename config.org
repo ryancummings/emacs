@@ -1048,36 +1048,36 @@ HTML mode is defined in =sgml-mode.el=.
 | =web-mode=  | https://github.com/fxbois/web-mode       |
 
 #+BEGIN_SRC emacs-lisp
-;; (use-package js-doc)
+    ;; (use-package js-doc)
 
-(use-package js2-mode
-  :ensure nil
-  :mode "\\.js\\'"
-  :custom
-  (js-indent-level 2)
-  (js-switch-indent-offset 2)
-  (js2-highlight-level 3)
-  (js2-idle-timer-delay 0)
-  (js2-mode-show-parse-errors nil)
-  (js2-mode-show-strict-warnings nil))
+    (use-package js2-mode
+      :ensure nil
+      :mode "\\.js\\'"
+      :custom
+      (js-indent-level 2)
+      (js-switch-indent-offset 2)
+      (js2-highlight-level 3)
+      (js2-idle-timer-delay 0)
+      (js2-mode-show-parse-errors nil)
+      (js2-mode-show-strict-warnings nil))
 
-(use-package rjsx-mode
-  :mode ("\\.jsx\\'" "components/.+\\.js$" "pages/.+\\.js$")
-  :hook
-  (rjsx-mode . (lambda () (setq me/pretty-print-function #'sgml-pretty-print)))
-  (rjsx-mode . sgml-electric-tag-pair-mode)
-  (rjsx-mode . turn-off-auto-fill)
-)
+    (use-package rjsx-mode
+      :mode ("\\.jsx\\'" "components/.+\\.js$" "pages/.+\\.js$" "src/.+\\.js$") ;; added all src js files to catch react files
+      :hook
+      (rjsx-mode . (lambda () (setq me/pretty-print-function #'sgml-pretty-print)))
+      (rjsx-mode . sgml-electric-tag-pair-mode)
+      (rjsx-mode . turn-off-auto-fill)
+    )
 
-(use-package web-mode
-  :mode ("\\.ts\\'" "\\.tsx\\'")
-  :hook
-  (web-mode . sgml-electric-tag-pair-mode)
-  :custom
-  (web-mode-code-indent-offset 2)
-  (web-mode-enable-auto-quoting nil)
-  (web-mode-markup-indent-offset 2)
-  (web-mode-enable-auto-indentation nil))
+    (use-package web-mode
+      :mode ("\\.ts\\'" "\\.tsx\\'")
+      :hook
+      (web-mode . sgml-electric-tag-pair-mode)
+      :custom
+      (web-mode-code-indent-offset 2)
+      (web-mode-enable-auto-quoting nil)
+      (web-mode-markup-indent-offset 2)
+      (web-mode-enable-auto-indentation nil))
 #+END_SRC
 
 *** JSON
