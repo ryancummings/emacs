@@ -861,11 +861,15 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
                  )))
 #+END_SRC
 ** TRAMP
-- To access other devices on the local network, run all TRAMP traffic through kubotunnel. Work in progress.
+- To access other devices on the local network, run all TRAMP traffic through kubotunnel. For instance, this lets you access rpi frame
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'tramp-default-proxies-alist
                '("192.168.1.24" nil "/ssh:kubo@ryanwcummings.com#443:"))
+#+END_SRC
 
+- Force tramp to use bash, because it doesn't like zsh
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 #+END_SRC
 
 * Programming
