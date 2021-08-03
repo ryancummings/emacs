@@ -15,30 +15,31 @@ This config depends on use-package to manage packages.
 Install use-package if not installed.
 
 #+BEGIN_SRC emacs-lisp
-(require 'package)
-(package-initialize)
-
-;; Select the folder to store packages
-;; Comment / Uncomment to use desired sites
-(setq package-user-dir (expand-file-name "elpa" user-emacs-directory)
-      package-archives
-      '(("gnu"   . "http://elpa.gnu.org/packages/")
-        ("melpa" . "https://melpa.org/packages/")
-        ("cselpa" . "https://elpa.thecybershadow.net/packages/")
-        ;; ("melpa-cn" . "http://mirrors.cloud.tencent.com/elpa/melpa/")
-        ;; ("gnu-cn"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
-        ))
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-and-compile
-  (setq use-package-always-ensure t)
-  (setq use-package-expand-minimally t)
-  (setq use-package-compute-statistics t)
-  (setq use-package-enable-imenu-support t))
-
+  (require 'package)
+  (package-initialize)
+  
+  ;; Select the folder to store packages
+  ;; Comment / Uncomment to use desired sites
+  (setq package-user-dir (expand-file-name "elpa" user-emacs-directory)
+        package-archives
+        '(("gnu"   . "http://elpa.gnu.org/packages/")
+          ("melpa" . "https://melpa.org/packages/")
+          ("cselpa" . "https://elpa.thecybershadow.net/packages/")
+          ;; ("melpa-cn" . "http://mirrors.cloud.tencent.com/elpa/melpa/")
+          ;; ("gnu-cn"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
+          ))
+  
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  
+  (eval-and-compile
+    (setq use-package-always-ensure t)
+    (setq use-package-expand-minimally t)
+    (setq use-package-compute-statistics t)
+    (setq use-package-enable-imenu-support t))
+  
+  
 #+END_SRC
 
 ** Shell
@@ -1181,7 +1182,6 @@ An extensible latex editor. Requires Tex Live.
       ("C-c l" . org-store-link)
       ("C-c a" . org-agenda)
       ("C-c c" . org-capture)
-      ("C-c b" . org-switch)
       ("C-c C-n" . org-next-visible-heading)
       ("C-c ." . org-time-stamp-inactive)
   
