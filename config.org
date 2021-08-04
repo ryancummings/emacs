@@ -24,7 +24,7 @@ Install use-package if not installed.
         package-archives
         '(("gnu"   . "http://elpa.gnu.org/packages/")
           ("melpa" . "https://melpa.org/packages/")
-          ("cselpa" . "https://elpa.thecybershadow.net/packages/")
+          ;; ("cselpa" . "https://elpa.thecybershadow.net/packages/")
           ;; ("melpa-cn" . "http://mirrors.cloud.tencent.com/elpa/melpa/")
           ;; ("gnu-cn"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
           ))
@@ -38,11 +38,11 @@ Install use-package if not installed.
     (setq use-package-expand-minimally t)
     (setq use-package-compute-statistics t)
     (setq use-package-enable-imenu-support t))
-  
-  
 #+END_SRC
 
 ** Shell
+https://github.com/purcell/exec-path-from-shell
+exec-path-from-shell makes sure Emacs shell works like the system shell, which is especially important on OSX
 #+BEGIN_SRC emacs-lisp
 (use-package exec-path-from-shell
   :ensure t
@@ -396,7 +396,7 @@ Ivy is a completion mechanism for emacs. Amx is an alternative M-x handler that 
 ** Color Ripgrep
 
 *Prerequisite*: Please install [[https://github.com/BurntSushi/ripgrep#installation][ripgrep]] and ensure =rg= is in the =PATH=.
-Ripgrep-based search and refactoring tool
+Ripgrep-based search and refactoring tool. MANDATORY: install ripgrep!
 #+BEGIN_SRC emacs-lisp
 (use-package color-rg
   :load-path (lambda () (expand-file-name "site-elisp/color-rg" user-emacs-directory))
@@ -516,7 +516,7 @@ Horizontal rules for page breaks
 (setq hscroll-margin 1)
 #+END_SRC
 ** Prettify symbols
-Displays fncy characters/symbols
+Displays fancy characters/symbols
 #+BEGIN_SRC emacs-lisp
 (global-prettify-symbols-mode 1)
 (defun add-pretty-lambda ()
@@ -539,8 +539,8 @@ Displays fncy characters/symbols
 #+END_SRC
 ** Time and battery
 #+BEGIN_SRC emacs-lisp
-(display-time-mode 1)
-(display-battery-mode 1)
+;; (display-time-mode 1)
+;; (display-battery-mode 1)
 #+END_SRC
 ** Dimmer
 Dims inactive windows
@@ -562,82 +562,79 @@ Auto-completion at point. Display a small pop-in containing the candidates.
 Company is a text completion framework for Emacs. The name stands for "complete
 anything". It uses pluggable back-ends and front-ends to retrieve and display
 completion candidates.
-
-TODO: Company is broken, return to this later to fix
-
 --- Dmitry Gutov
 #+END_QUOTE
 
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package company
-;;     :hook
-;;     (after-init . global-company-mode)
-;;     :custom
-;;     (company-backends '(company-capf))
-;;     (company-dabbrev-downcase nil)
-;;     (company-dabbrev-ignore-case nil)
-;;     (company-dabbrev-other-buffers nil)
-;;     (company-global-modes '(not help-mode message-mode))
-;;     (company-idle-delay .0)
-;;     (company-minimum-prefix-length 1)
-;;     (company-require-match nil)
-;;     (company-selection-wrap-around t)
-;;     (company-tooltip-align-annotations t)
-;;     (company-tooltip-flip-when-above t)
-;;     (company-tooltip-offset-display nil)
-;;     (company-tooltip-width-grow-only t)
-;; ;;    :config
-;; ;;    (company-tng-mode)
-;;     )
+    (use-package company
+      :hook
+      (after-init . global-company-mode)
+      :custom
+      (company-backends '(company-capf))
+      (company-dabbrev-downcase nil)
+      (company-dabbrev-ignore-case nil)
+      (company-dabbrev-other-buffers nil)
+      (company-global-modes '(not help-mode message-mode))
+      (company-idle-delay .0)
+      (company-minimum-prefix-length 1)
+      (company-require-match nil)
+      (company-selection-wrap-around t)
+      (company-tooltip-align-annotations t)
+      (company-tooltip-flip-when-above t)
+      (company-tooltip-offset-display nil)
+      (company-tooltip-width-grow-only t)
+     :config
+     (company-tng-mode)
+      )
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package company-box
-  ;;   :after company
-  ;;   :defer nil
-  ;;   :hook
-  ;;   (company-mode . company-box-mode)
-  ;;   :custom
-  ;;   (company-box-icons-all-the-icons
-  ;;    (let ((all-the-icons-default-adjust -.22)
-  ;;          (all-the-icons-scale-factor .8)
-  ;;          (blue 'all-the-icons-blue)
-  ;;          (green 'all-the-icons-gree)
-  ;;          (maroon 'all-the-icons-maroon)
-  ;;          (pink 'all-the-icons-pink)
-  ;;          (purple 'all-the-icons-purple)
-  ;;          (red 'all-the-icons-red))
-  ;;      `((Class         . ,(all-the-icons-material "class"                    :face red))
-  ;;        (Color         . ,(all-the-icons-material "palette"                  :face red))
-  ;;        (Constant      . ,(all-the-icons-material "pause_circle_filled"      :face blue))
-  ;;        (Constructor   . ,(all-the-icons-material "functions"                :face red))
-  ;;        (Enum          . ,(all-the-icons-material "plus_one"                 :face blue))
-  ;;        (EnumMember    . ,(all-the-icons-material "people"                   :face blue))
-  ;;        (Event         . ,(all-the-icons-material "event"                    :face red))
-  ;;        (Field         . ,(all-the-icons-material "functions"                :face red))
-  ;;        (File          . ,(all-the-icons-material "insert_drive_file"        :face pink))
-  ;;        (Folder        . ,(all-the-icons-material "folder"                   :face maroon))
-  ;;        (Function      . ,(all-the-icons-material "functions"                :face red))
-  ;;        (Interface     . ,(all-the-icons-material "settings_input_component" :face red))
-  ;;        (Keyword       . ,(all-the-icons-material "filter_center_focus"      :face red))
-  ;;        (Method        . ,(all-the-icons-material "functions"                :face red))
-  ;;        (Module        . ,(all-the-icons-material "view_module"              :face red))
-  ;;        (Operator      . ,(all-the-icons-material "control_point"            :face red))
-  ;;        (Property      . ,(all-the-icons-material "settings"                 :face red))
-  ;;        (Reference     . ,(all-the-icons-material "collections_bookmark"     :face red))
-  ;;        (Snippet       . ,(all-the-icons-material "short_text"               :face pink))
-  ;;        (Struct        . ,(all-the-icons-material "streetview"               :face blue))
-  ;;        (Template      . ,(all-the-icons-material "short_text"               :face green))
-  ;;        (Text          . ,(all-the-icons-material "text_fields"              :face green))
-  ;;        (TypeParameter . ,(all-the-icons-material "class"                    :face red))
-  ;;        (Unit          . ,(all-the-icons-material "straighten"               :face red))
-  ;;        (Unknown       . ,(all-the-icons-material "find_in_page"             :face purple))
-  ;;        (Value         . ,(all-the-icons-material "filter_1"                 :face red))
-  ;;        (Variable      . ,(all-the-icons-material "adjust"                   :face blue)))))
-  ;;   (company-box-icons-alist 'company-box-icons-all-the-icons)
-  ;;   (company-box-max-candidates 50)
-  ;;   (company-box-scrollbar nil)
-  ;;   (company-box-show-single-candidate 'always))
+(use-package company-box
+    :after company
+    :defer nil
+    :hook
+    (company-mode . company-box-mode)
+    :custom
+    (company-box-icons-all-the-icons
+     (let ((all-the-icons-default-adjust -.22)
+           (all-the-icons-scale-factor .8)
+           (blue 'all-the-icons-blue)
+           (green 'all-the-icons-gree)
+           (maroon 'all-the-icons-maroon)
+           (pink 'all-the-icons-pink)
+           (purple 'all-the-icons-purple)
+           (red 'all-the-icons-red))
+       `((Class         . ,(all-the-icons-material "class"                    :face red))
+         (Color         . ,(all-the-icons-material "palette"                  :face red))
+         (Constant      . ,(all-the-icons-material "pause_circle_filled"      :face blue))
+         (Constructor   . ,(all-the-icons-material "functions"                :face red))
+         (Enum          . ,(all-the-icons-material "plus_one"                 :face blue))
+         (EnumMember    . ,(all-the-icons-material "people"                   :face blue))
+         (Event         . ,(all-the-icons-material "event"                    :face red))
+         (Field         . ,(all-the-icons-material "functions"                :face red))
+         (File          . ,(all-the-icons-material "insert_drive_file"        :face pink))
+         (Folder        . ,(all-the-icons-material "folder"                   :face maroon))
+         (Function      . ,(all-the-icons-material "functions"                :face red))
+         (Interface     . ,(all-the-icons-material "settings_input_component" :face red))
+         (Keyword       . ,(all-the-icons-material "filter_center_focus"      :face red))
+         (Method        . ,(all-the-icons-material "functions"                :face red))
+         (Module        . ,(all-the-icons-material "view_module"              :face red))
+         (Operator      . ,(all-the-icons-material "control_point"            :face red))
+         (Property      . ,(all-the-icons-material "settings"                 :face red))
+         (Reference     . ,(all-the-icons-material "collections_bookmark"     :face red))
+         (Snippet       . ,(all-the-icons-material "short_text"               :face pink))
+         (Struct        . ,(all-the-icons-material "streetview"               :face blue))
+         (Template      . ,(all-the-icons-material "short_text"               :face green))
+         (Text          . ,(all-the-icons-material "text_fields"              :face green))
+         (TypeParameter . ,(all-the-icons-material "class"                    :face red))
+         (Unit          . ,(all-the-icons-material "straighten"               :face red))
+         (Unknown       . ,(all-the-icons-material "find_in_page"             :face purple))
+         (Value         . ,(all-the-icons-material "filter_1"                 :face red))
+         (Variable      . ,(all-the-icons-material "adjust"                   :face blue)))))
+    (company-box-icons-alist 'company-box-icons-all-the-icons)
+    (company-box-max-candidates 50)
+    (company-box-scrollbar nil)
+    (company-box-show-single-candidate 'always))
 #+END_SRC
 
 ** Dired
@@ -864,7 +861,7 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
                  )))
 #+END_SRC
 ** TRAMP
-- To access other devices on the local network, run all TRAMP traffic through kubotunnel. Work in progress.
+- Sometimes you want to jump multiple proxies to your destination. To access other devices on the local network, run all TRAMP traffic through my tunnel. 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'tramp-default-proxies-alist
                '("192.168.1.24" nil "/ssh:kubo@ryanwcummings.com#443:"))
@@ -1005,7 +1002,8 @@ File tree mode for project management.
       (pdf-view-mode . (lambda () (display-line-numbers-mode -1)))
       :config
       (pdf-loader-install))
-  
+
+  ;; Use emacs to read pdf links from org files
   (delete '("\\.pdf\\'" . default) org-file-apps)
   (add-to-list 'org-file-apps '("\\.pdf\\'" . emacs))
 #+END_SRC
@@ -1195,19 +1193,19 @@ An extensible latex editor. Requires Tex Live.
                 "* TODO %?\n" :kill-buffer t
                 )
                ("T" "Tickler (reminder)" entry (file+headline "~/org/schedule.org" "Tickler")
-                "* %?\nSCHEDULED: %^t" :kill-buffer t)
-               ("m" "Meeting" entry (file+headline "~/org/schedule.org" "Meetings")
                 "* TODO %?\nSCHEDULED: %^t" :kill-buffer t)
+               ("m" "Meeting" entry (file+headline "~/org/schedule.org" "Meetings")
+                "* %?\n%^t" :kill-buffer t)
                ("n" "Note" entry (file "~/org/inbox.org")
                 "* %? :NOTE:\n%U\n" :kill-buffer t)
                ("g" "Groceries" item (file+headline "~/org/gtd.org" "Groceries")
                 "- %?\n")
                ("b" "Buy" entry (file+headline "~/org/gtd.org" "Shopping inbox")
-                "* %?\n")
+                "- %?\n")
                ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
                 "* %?\n%U\n")
-               ("p" "Programming Log" entry (file+headline "~/org/notebook.org" "Programming Log")
-                "* %u %?\n")
+               ("p" "Programming Log" entry (file+olp+datetree "~/org/technical_notebook.org" "Programming Log")
+                "* %?\n%u")
                )))
       (org-log-done 'time)
       (org-export-backends (quote (ascii html icalendar latex md odt)))
