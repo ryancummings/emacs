@@ -1236,7 +1236,8 @@ An extensible latex editor. Requires Tex Live.
 
     ;; Allow refile to create parent tasks with confirmation
     (org-refile-allow-creating-parent-nodes (quote confirm))
-    (org-ellipsis "⤵")
+    ;; (org-ellipsis "⤵")
+    (org-ellipsis "...")
     ;; Set up Org to play with Counsel:
     (counsel-org-goto-display-style 'path)
     (counsel-org-goto-separator " ➜ ")
