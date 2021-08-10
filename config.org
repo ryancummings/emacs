@@ -1297,6 +1297,12 @@ An extensible latex editor. Requires Tex Live.
             org-latex-packages-alist '(("" "minted")))))
 
 #+END_SRC
+** Olivetti Mode
+A nice mode for distraction-free writing.
+#+BEGIN_SRC emacs-lisp
+(use-package olivetti
+  :ensure t)
+#+END_SRC
 * Final load
 #+BEGIN_SRC emacs-lisp
 (find-file "~/org/gtd.org")
