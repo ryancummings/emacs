@@ -475,11 +475,11 @@ Quickly open a file with 'sudo'
   :commands (sudo-edit))
 #+END_SRC
 ** Page break lines
-Horizontal rules for page breaks
+Horizontal rules for page breaks (breaks org-roam v2.0!!)
 #+BEGIN_SRC emacs-lisp
-(use-package page-break-lines
-  :diminish
-  :init (global-page-break-lines-mode))
+;; (use-package page-break-lines
+;;  :diminish
+;;  :init (global-page-break-lines-mode))
 #+END_SRC
 ** Fonts
 *** Icons
