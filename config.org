@@ -1297,6 +1297,44 @@ An extensible latex editor. Requires Tex Live.
             org-latex-packages-alist '(("" "minted")))))
 
 #+END_SRC
+** Org-Roam
+#+BEGIN_SRC emacs-lisp
+(use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/RoamNotes")
+  (org-roam-completion-everywhere t)
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         :map org-mode-map
+         ("C-M-i" . completion-at-point))
+  :config
+  (org-roam-setup))
+#+END_SRC
+** Org-Download
+Requires XClip. Basically, use flameshot to take a screenshot to clipboard (flameshot gui, then ctrl+c to copy), then import it with C-M-y (org-download-clipboard)
+#+BEGIN_SRC emacs-lisp
+  (use-package org-download
+    :ensure t
+    :after org
+    :bind
+    (:map org-mode-map
+          (("C-M-S-y" . org-download-yank)
+           ("C-M-y" . org-download-clipboard)))
+    :config
+    (setq-default org-download-image-dir "~/org/images")
+    :custom
+    (org-download-screenshot-method "flameshot")
+    )
+#+END_SRC
 ** Olivetti Mode
 A nice mode for distraction-free writing.
 #+BEGIN_SRC emacs-lisp
