@@ -1142,35 +1142,8 @@ Setup for programming in Python
     :hook (python-mode . pipenv-mode))
 #+END_SRC
 
-* Org and LaTeX
-** AUCTeX
-An extensible latex editor. Requires Tex Live. 
-#+BEGIN_SRC emacs-lisp
-(use-package tex
-  :ensure auctex
-  :defer t
-  :custom
-  (TeX-auto-save t)
-  (TeX-parse-self t)
-  (TeX-master nil)
-  ;; to use pdfview with auctex
-  (TeX-view-program-selection '((output-pdf "pdf-tools"))
-                              TeX-source-correlate-start-server t)
-  (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
-  (TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-  :hook
-  (LaTeX-mode . (lambda ()
-                  (turn-on-reftex)
-                  (setq reftex-plug-into-AUCTeX t)
-                  (reftex-isearch-minor-mode)
-                  (setq TeX-PDF-mode t)
-                  (setq TeX-source-correlate-method 'synctex)
-                  (setq TeX-source-correlate-start-server t)))
-  :config
-  (when (version< emacs-version "26")
-    (add-hook LaTeX-mode-hook #'display-line-numbers-mode)))
-#+END_SRC
-** Org
+* Org
+** Org Mode
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :ensure t
@@ -1210,6 +1183,8 @@ An extensible latex editor. Requires Tex Live.
               "* %?\n%U\n")
              ("p" "Programming Log" entry (file+olp+datetree "~/org/technical_notebook.org" "Programming Log")
               "* %?\n%u")
+             ("l" "Lecture/Conference" entry (file+headline "~/org/radiology.org" "Inbox")
+              "* %?\n%U")
              )))
     (org-log-done 'time)
     (org-export-backends (quote (ascii html icalendar latex md odt)))
@@ -1345,6 +1320,34 @@ A nice mode for distraction-free writing.
 #+BEGIN_SRC emacs-lisp
 (use-package olivetti
   :ensure t)
+#+END_SRC
+* LaTeX
+** AUCTeX
+An extensible latex editor. Requires Tex Live. 
+#+BEGIN_SRC emacs-lisp
+(use-package tex
+  :ensure auctex
+  :defer t
+  :custom
+  (TeX-auto-save t)
+  (TeX-parse-self t)
+  (TeX-master nil)
+  ;; to use pdfview with auctex
+  (TeX-view-program-selection '((output-pdf "pdf-tools"))
+                              TeX-source-correlate-start-server t)
+  (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
+  (TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  :hook
+  (LaTeX-mode . (lambda ()
+                  (turn-on-reftex)
+                  (setq reftex-plug-into-AUCTeX t)
+                  (reftex-isearch-minor-mode)
+                  (setq TeX-PDF-mode t)
+                  (setq TeX-source-correlate-method 'synctex)
+                  (setq TeX-source-correlate-start-server t)))
+  :config
+  (when (version< emacs-version "26")
+    (add-hook LaTeX-mode-hook #'display-line-numbers-mode)))
 #+END_SRC
 * Final load
 #+BEGIN_SRC emacs-lisp
