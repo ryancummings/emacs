@@ -1277,7 +1277,6 @@ Setup for programming in Python
   ;; Org-Roam basic configuration
   (use-package org-roam
     :after org
-    :init (setq org-roam-v2-ack t) ;; Acknowledge V2 upgrade
     :custom
     (org-roam-directory "~/org/RoamNotes")
     (org-roam-db-location (expand-file-name (concat "org-roam." (system-name) ".db") org-roam-directory))
@@ -1288,6 +1287,7 @@ Setup for programming in Python
                                                            "#+title: ${title}\n#+date: %U\n\n")
                                         :unnarrowed t
                                         :immediate-finish t)))
+    (setq org-roam-v2-ack t) ;; Acknowledge V2 upgrade
     (org-roam-setup)
     :bind (("C-c n f" . org-roam-node-find)
            ("C-c n g" . org-roam-graph)
