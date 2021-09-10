@@ -863,8 +863,8 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
 ** TRAMP
 - Sometimes you want to jump multiple proxies to your destination. To access other devices on the local network, run all TRAMP traffic through my tunnel. 
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'tramp-default-proxies-alist
-               '("192.168.1.24" nil "/ssh:kubo@ryanwcummings.com#443:"))
+;  (add-to-list 'tramp-default-proxies-alist
+;               '("192.168.1.24" nil "/ssh:kubo@ryanwcummings.com#443:"))
 
 #+END_SRC
 
@@ -1155,7 +1155,7 @@ Setup for programming in Python
     ("C-c c" . org-capture)
     ("C-c C-n" . org-next-visible-heading)
     ("C-c ." . org-time-stamp-inactive)
-
+  
     :custom
     (org-startup-indented t)
     ;; ORG Directories
@@ -1185,8 +1185,12 @@ Setup for programming in Python
               "* %?\n%u")
              ("l" "Lecture/Conference" entry (file+headline "~/org/radiology.org" "Inbox")
               "* %?\n%U")
+             ("a" "Affirmations" entry (file "~/org/affirmations.org")
+              "* %? :Affirmation:" :kill-buffer t
+              )
              )))
     (org-log-done 'time)
+    (add-hook 'org-mode-hook 'org-align-all-tags)
     (org-export-backends (quote (ascii html icalendar latex md odt)))
     (org-use-speed-commands t)
     (org-confirm-babel-evaluate 'nil)
@@ -1202,13 +1206,13 @@ Setup for programming in Python
        ))
     (org-agenda-files
      (quote
-      ("~/org/inbox.org" "~/org/gtd.org" "~/org/schedule.org" "~/org/habits.org" "~/org/journal.org")))
+      ("~/org/inbox.org" "~/org/gtd.org" "~/org/schedule.org" "~/org/habits.org" "~/org/journal.org" "~/org/affirmations.org")))
     (org-agenda-window-setup 'current-window)
     (org-refile-targets '((nil :maxlevel . 5)
                           (org-agenda-files :maxlevel . 5)))
     (org-outline-path-complete-in-steps nil)         ; Refile in a single go
     (org-refile-use-outline-path nil)                  ; Show full paths for refiling
-
+  
     ;; Allow refile to create parent tasks with confirmation
     (org-refile-allow-creating-parent-nodes (quote confirm))
     ;; (org-ellipsis "⤵")
@@ -1220,10 +1224,11 @@ Setup for programming in Python
     (org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
     ;; Set default column view headings: Task Total-Time Time-Stamp
     (org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
-
+  
     (org-agenda-custom-commands
      '(("d" "Daily agenda and all TODOs"
-        ((tags "PRIORITY=\"A\""
+        ((tags "Affirmation")
+         (tags "PRIORITY=\"A\""
                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                 (org-agenda-overriding-header "High-priority unfinished tasks:")))
          ;; Number of days to show in agenda: 1 shows only today
@@ -1238,7 +1243,7 @@ Setup for programming in Python
                                                     (org-agenda-skip-if nil '(scheduled deadline))))
                      (org-agenda-overriding-header "ALL normal priority non-project tasks:"))))
         ((org-agenda-compact-blocks t)))))
-
+  
     :config
     (unless (version< org-version "9.2")
       (require 'org-tempo))
@@ -1246,7 +1251,7 @@ Setup for programming in Python
     (define-key org-mode-map (kbd "C-c C-j") 'counsel-org-goto)
     ;; (when (file-directory-p "~/org/agenda/")
     ;;   (setq org-agenda-files (list "~/org/agenda/")))
-
+  
     (defun air-org-skip-subtree-if-priority (priority)
       "Skip an agenda subtree if it has a priority of PRIORITY.
     PRIORITY may be one of the characters ?A, ?B, or ?C.
@@ -1264,13 +1269,13 @@ Setup for programming in Python
         (if (string= (org-entry-get nil "STYLE") "habit")
             subtree-end
           nil)))
-
+  
     (defun org-export-turn-on-syntax-highlight ()
       "Setup variables to turn on syntax highlighting when calling `org-latex-export-to-pdf'."
       (interactive)
       (setq org-latex-listings 'minted
             org-latex-packages-alist '(("" "minted")))))
-
+  
 #+END_SRC
 ** Org-Roam
 #+BEGIN_SRC emacs-lisp
