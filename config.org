@@ -276,53 +276,27 @@ and =user-mail-address=. This is also where you want your API tokens to live.
 Load the theme and fix some faces to match my personal preferences.
 
 #+BEGIN_SRC emacs-lisp
-(use-package doom-themes
-  :demand t
-  :custom
-  (doom-themes-enable-bold nil)
-  (doom-themes-enable-italic nil)
-  :config
-  (load-theme 'doom-one t)
-  (doom-themes-org-config)
-  (doom-themes-visual-bell-config)
-  (doom-themes-set-faces nil
-    '(default :font me/font-family :height me/font-size-default)
-    '(doom-modeline-bar :background 'unspecified)
-    '(flycheck-error :underline `(:color ,error :style line))
-    '(flycheck-info :underline `(:color ,highlight :style line))
-    '(flycheck-warning :underline `(:color ,warning :style line))
-    '(fringe :background 'unspecified)
-    '(helpful-heading :foreground red :height me/font-size-large)
-    '(info-title-4 :bold nil :foreground red)
-    '(isearch :inherit 'highlight)
-    '(italic :italic nil)
-    '(lazy-highlight :foreground blue)
-    '(line-number :background 'unspecified :foreground base5)
-    '(lsp-face-highlight-read :foreground fg)
-    '(lsp-face-highlight-textual :foreground fg)
-    '(lsp-face-highlight-write :foreground fg)
-    '(magit-diff-added :background 'unspecified)
-    '(magit-diff-added-highlight :background 'unspecified :inherit 'magit-diff-context-highlight)
-    '(magit-diff-context-highlight :background base3 :foreground 'unspecified :inherit 'magit-diff-context)
-    '(magit-diff-hunk-region :inherit 'region)
-    '(magit-diff-removed :background 'unspecified)
-    '(magit-diff-removed-highlight :background 'unspecified :inherit 'magit-diff-context-highlight)
-    '(magit-section-heading :foreground red :height me/font-size-large)
-    '(markdown-table-face :height me/font-size-small)
-    '(mode-line-inactive :background bg-alt)
-    '(org-block :background (doom-lighten base3 .05))
-    '(org-block-begin-line :background 'unspecified)
-    '(org-quote :background 'unspecified :inherit 'font-lock-doc-face)
-    '(outline-1 :foreground red)
-    '(swiper-background-match-face-1 :background 'unspecified)
-    '(swiper-line-face :extend t)
-    '(swiper-match-face-1 :background 'unspecified :foreground 'unspecified)
-    '(tooltip :background base1)
-    '(variable-pitch :family 'unspecified)
-    '(vertical-border :background 'unspecified :inverse-video t)
-    '(which-key-command-description-face :foreground 'unspecified)
-    '(whitespace-empty :background red :extend t)))
+  (use-package doom-themes
+    :ensure t
+    :config
+    ;; Global settings (defaults)
+    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+          doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    (load-theme 'doom-one t)
+  
+    ;; Enable flashing mode-line on errors
+    (doom-themes-visual-bell-config)
+    ;; Enable custom neotree theme (all-the-icons must be installed!)
+    (doom-themes-neotree-config)
+    ;; or for treemacs users
+    (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+    (doom-themes-treemacs-config)
+    ;; Corrects (and improves) org-mode's native fontification.
+    (doom-themes-org-config))
 #+END_SRC
+
+#+RESULTS:
+: #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data (:use-package (24891 63887 936289 313000) :init (24891 63887 936283 132000) :config (24891 63887 936271 276000) :config-secs (0 0 377300 592000) :init-secs (0 0 377329 868000) :use-package-secs (0 0 377415 55000)))
 
 * Features
 ** Avy
@@ -863,10 +837,23 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
 ** TRAMP
 - Sometimes you want to jump multiple proxies to your destination. To access other devices on the local network, run all TRAMP traffic through my tunnel. 
 #+BEGIN_SRC emacs-lisp
-;  (add-to-list 'tramp-default-proxies-alist
-;               '("192.168.1.24" nil "/ssh:kubo@ryanwcummings.com#443:"))
-
+  (add-to-list 'tramp-default-proxies-alist
+               '("192.168.1.24" nil "/ssh:kubo@ryanwcummings.com#443:"))
+  
 #+END_SRC
+** Yasnippet
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :bind
+    ("C-c y s" . yas-insert-snippet)
+    ("C-c y v" . yas-visit-snippet-file)
+    :config
+    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+    (yas-global-mode 1))
+#+END_SRC
+
+#+RESULTS:
+: #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data (:use-package (24891 64249 570004 629000) :init (24891 64249 569859 808000) :config (24891 64249 569837 294000) :config-secs (0 0 2099 826000) :init-secs (0 0 2129 633000) :use-package-secs (0 3 140824 403000)))
 
 * Programming
 ** Magit
