@@ -261,13 +261,15 @@ and =user-mail-address=. This is also where you want your API tokens to live.
 (defvar me/erc-port           nil                 "The ERC port to use.")
 (defvar me/erc-server         nil                 "The ERC server to use.")
 (defvar me/font-family        "Source Code Pro"            "The font to use.")
-(defvar me/font-size-default  120                 "The font size to use for default text.")
+(defvar me/font-size-default  100                 "The font size to use for default text.")
 (defvar me/font-size-large    1.2                 "The font size to use for larger text.")
 (defvar me/font-size-small    .8                  "The font size to use for smaller text.")
 
 (let ((secret.el (expand-file-name ".secret.el" user-emacs-directory)))
   (load secret.el t))
 #+END_SRC
+
+#+RESULTS:
 
 ** Theme
 
@@ -372,10 +374,10 @@ Ivy is a completion mechanism for emacs. Amx is an alternative M-x handler that 
 *Prerequisite*: Please install [[https://github.com/BurntSushi/ripgrep#installation][ripgrep]] and ensure =rg= is in the =PATH=.
 Ripgrep-based search and refactoring tool. MANDATORY: install ripgrep!
 #+BEGIN_SRC emacs-lisp
-(use-package color-rg
-  :load-path (lambda () (expand-file-name "site-elisp/color-rg" user-emacs-directory))
-  :if *rg*
-  :bind ("C-M-s" . color-rg-search-input))
+  (use-package color-rg
+    :load-path (lambda () (expand-file-name "site-elisp/color-rg" user-emacs-directory))
+    :if *rg*
+    :bind ("C-M-s" . color-rg-search-input))
 #+END_SRC
 
 ** Save All Buffers
@@ -847,6 +849,7 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
     :bind
     ("C-c y s" . yas-insert-snippet)
     ("C-c y v" . yas-visit-snippet-file)
+    ("C-;" . yas-expand)
     :config
     (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
     (yas-global-mode 1))
