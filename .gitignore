@@ -52,5 +52,15 @@ flycheck_*.el
 # network security
 /network-security.data
 
+# misc stuff
+.custom.el
+.last-package-update-day
+config.el
+recentf
+bookmarks
+projectile-bookmarks.eld
+amx-items
+*transient*
+
 
 # End of https://www.toptal.com/developers/gitignore/api/emacs
