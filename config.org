@@ -3,6 +3,7 @@
 #+LATEX_HEADER: \usepackage{parskip}
 #+LATEX_HEADER: \usepackage{inconsolata}
 #+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+STARTUP: overview
 * Intro
 Welcome to my config! Feel free to borrow anything you like. Quick tips below:
 - To edit a source block, it is best to pop open a code editor with =C-c '=
