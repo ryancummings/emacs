@@ -61,6 +61,6 @@ bookmarks
 projectile-bookmarks.eld
 amx-items
 *transient*
-
+.lsp
 
 # End of https://www.toptal.com/developers/gitignore/api/emacs
