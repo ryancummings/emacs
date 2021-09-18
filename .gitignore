@@ -62,5 +62,9 @@ projectile-bookmarks.eld
 amx-items
 *transient*
 .lsp
+.cache*
+games/
+places
+session*
 
 # End of https://www.toptal.com/developers/gitignore/api/emacs
