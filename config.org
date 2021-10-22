@@ -1172,7 +1172,7 @@ Setup for programming in Python
               "* %? :Affirmation:" :kill-buffer t
               )
              ("i" "Interesting Case" entry (file+headline "~/org/radiology.org" "Interesting cases")
-              "* %^{description} :%^{hospital|nyu|bellevue}:\n%u\nMRN: %^{mrn}\n- %?" :kill-buffer t
+              "* %^{description} :%^{specialty|msk|body|neuro|peds|chest|ir|breast}:%^{hospital|nyu|bellevue}:\n%u\nMRN: %^{mrn}\n- %?" :kill-buffer t
               )
              )))
     (org-log-done 'time)
