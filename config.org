@@ -1172,7 +1172,7 @@ Setup for programming in Python
               "* %? :Affirmation:" :kill-buffer t
               )
              ("i" "Interesting Case" entry (file+headline "~/org/radiology.org" "Interesting cases")
-              "* %^{description} :%^{specialty|msk|body|neuro|peds|chest|ir|breast}:%^{hospital|nyu|bellevue}:\n%u\nMRN: %^{mrn}\n- %?" :kill-buffer t
+              "* %^{description} :%^{specialty|msk|body|neuro|peds|chest|ir|breast}:%^{hospital|nyu|bellevue}:\n%u\nMRN: %^{mrn}\nModality: %^{modality|mri|ct|ultrasound|xray|nuclear|mammo|fluoro}\nNotes:\n- %?" :kill-buffer t
               )
              )))
     (org-log-done 'time)
@@ -1192,7 +1192,7 @@ Setup for programming in Python
        ))
     (org-agenda-files
      (quote
-      ("~/org/inbox.org" "~/org/gtd.org" "~/org/schedule.org" "~/org/habits.org" "~/org/journal.org" "~/org/affirmations.org")))
+      ("~/org/inbox.org" "~/org/gtd.org" "~/org/schedule.org" "~/org/habits.org" "~/org/journal.org" "~/org/affirmations.org" "~/org/radiology.org")))
     (org-agenda-window-setup 'current-window)
     (org-refile-targets '((nil :maxlevel . 5)
                           (org-agenda-files :maxlevel . 5)))
