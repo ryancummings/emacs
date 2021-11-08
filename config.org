@@ -331,19 +331,12 @@ This provides some small helpful features
   (crux-with-region-or-point-to-eol kill-ring-save)
   (defalias 'rename-file-and-buffer #'crux-rename-file-and-buffer))
 #+END_SRC
-** Completion frameworks
+** Completion Frameworks
 
-Install vertico and enable vertico-mode to get incremental minibuffer completion.
+TODO: Install embark and add two keybindings for embark-dwim and embark-act. I am using M-. and C-.. These commands allow you to act on the object at point or in the minibuffer. No actions on multiple candidates for now though.
 
-Install orderless and/or configure the built-in completion styles for more flexible minibuffer filtering.
+TODO: Set up Consult bindings for helpful functions
 
-Install marginalia if you like rich minibuffer annotations. Exisiting commands are enhanced with these annotations, e.g., find-file.
-
-Install embark and add two keybindings for embark-dwim and embark-act. I am using M-. and C-.. These commands allow you to act on the object at point or in the minibuffer. No actions on multiple candidates for now though.
-
-Install consult if you want additional featureful completion commands, e.g, the buffer switcher consult-buffer with preview or the line-based search consult-line. consult-buffer can work with multiple candidate sources similar to helm-mini.
-
-You don't have to use all of these components. Use only the ones you like and the ones which fit well into your setup. Note that in steps 1. to 4. no new commands are introduced over plain Emacs. In step 5. the commands embark-act and embark-dwim are introduced. In step 6. you get the Consult commands, some offer new functionality not present in Emacs already (e.g., consult-line) and some are substitutes (e.g., consult-buffer for switch-to-buffer).
 
 #+BEGIN_SRC emacs-lisp
   ;; Enable vertico
