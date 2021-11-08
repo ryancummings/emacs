@@ -66,5 +66,7 @@ amx-items
 games/
 places
 session*
+history
+eln-cache*
 
 # End of https://www.toptal.com/developers/gitignore/api/emacs
