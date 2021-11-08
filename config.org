@@ -337,7 +337,8 @@ TODO: Install embark and add two keybindings for embark-dwim and embark-act. I a
 
 TODO: Set up Consult bindings for helpful functions
 
-
+*** Vertico
+Provides the backbone vertical completion list used by the various completion modules to follow.
 #+BEGIN_SRC emacs-lisp
   ;; Enable vertico
   (use-package vertico
@@ -351,22 +352,10 @@ TODO: Set up Consult bindings for helpful functions
     ;; (setq vertico-cycle t)
     )
 
-
-  (use-package orderless
-    :init
-    ;; Configure a custom style dispatcher (see the Consult wiki)
-    ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
-    ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-    (setq completion-styles '(orderless)
-          completion-category-defaults nil
-          completion-category-overrides '((file (styles partial-completion)))))
-
-
   ;; Persist history over Emacs restarts. Vertico sorts by history position.
   (use-package savehist
     :init
     (savehist-mode))
-
 
   ;; A few more useful configurations...
   (use-package emacs
@@ -390,7 +379,22 @@ TODO: Set up Consult bindings for helpful functions
     ;; Enable recursive minibuffers
     (setq enable-recursive-minibuffers t))
 
+#+END_SRC
 
+*** Orderless
+#+BEGIN_SRC emacs-lisp
+  (use-package orderless
+    :init
+    ;; Configure a custom style dispatcher (see the Consult wiki)
+    ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+    ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+    (setq completion-styles '(orderless)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion)))))
+#+END_SRC
+
+*** Marginalia
+#+BEGIN_SRC emacs-lisp
   ;; Enable richer annotations using the Marginalia package
   (use-package marginalia
     ;; Either bind `marginalia-cycle` globally or only in the minibuffer
@@ -400,8 +404,9 @@ TODO: Set up Consult bindings for helpful functions
 
     :init
     (marginalia-mode))
-
-
+#+END_SRC
+*** Consult
+#+BEGIN_SRC emacs-lisp
   ;; Use Consult for completion selection
   (use-package consult
     ;; Replace bindings. Lazily loaded due by `use-package'.
@@ -518,8 +523,10 @@ TODO: Set up Consult bindings for helpful functions
     ;; (setq consult-project-root-function #'vc-root-dir)
     ;;;; 4. locate-dominating-file
     ;; (setq consult-project-root-function (lambda () (locate-dominating-file "." ".git")))
-  )
-
+  )  
+#+END_SRC
+*** Embark
+#+BEGIN_SRC emacs-lisp
   ;; Use Embark
   (use-package embark
     :ensure t
