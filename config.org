@@ -298,9 +298,6 @@ Load the theme and fix some faces to match my personal preferences.
     (doom-themes-org-config))
 #+END_SRC
 
-#+RESULTS:
-: #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data (:use-package (24891 63887 936289 313000) :init (24891 63887 936283 132000) :config (24891 63887 936271 276000) :config-secs (0 0 377300 592000) :init-secs (0 0 377329 868000) :use-package-secs (0 0 377415 55000)))
-
 * Features
 ** Avy
 
