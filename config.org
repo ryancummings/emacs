@@ -1384,6 +1384,12 @@ A nice mode for distraction-free writing.
 (use-package olivetti
   :ensure t)
 #+END_SRC
+** Ox-Hugo
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-hugo
+    :ensure t            ;Auto-install the package from Melpa (optional)
+    :after ox)
+#+END_SRC
 * LaTeX
 ** AUCTeX
 An extensible latex editor. Requires Tex Live. 
