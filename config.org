@@ -157,44 +157,44 @@ Automatically update packags after an interval of days
 Here are what I consider better defaults as per my own experience.
 
 #+BEGIN_SRC emacs-lisp
-(setq-default
- ad-redefinition-action 'accept                   ; Silence warnings for redefinition
- auto-save-list-file-prefix nil                   ; Prevent tracking for auto-saves
- cursor-in-non-selected-windows nil               ; Hide the cursor in inactive windows
- cursor-type 'bar                                 ; Prefer a bar-shaped cursor
- custom-unlispify-menu-entries nil                ; Prefer kebab-case for titles
- custom-unlispify-tag-names nil                   ; Prefer kebab-case for symbols
- delete-by-moving-to-trash t                      ; Delete files to trash
- fill-column 80                                   ; Set width for automatic line breaks
- gc-cons-threshold (* 8 1024 1024)                ; We're not using Game Boys anymore
- help-window-select t                             ; Focus new help windows when opened
- indent-tabs-mode nil                             ; Stop using tabs to indent
- inhibit-startup-screen t                         ; Disable start-up screen
- initial-scratch-message ""                       ; Empty the initial *scratch* buffer
- mouse-yank-at-point t                            ; Yank at point rather than pointer
- recenter-positions '(5 top bottom)               ; Set re-centering positions
- scroll-conservatively most-positive-fixnum       ; Always scroll by one line
- scroll-margin 2                                  ; Add a margin when scrolling vertically
- select-enable-clipboard t                        ; Merge system's and Emacs' clipboard
- sentence-end-double-space nil                    ; Use a single space after dots
- show-help-function nil                           ; Disable help text everywhere
- tab-width 4                                      ; Set width for tabs
- uniquify-buffer-name-style 'forward              ; Uniquify buffer names
- window-combination-resize t                      ; Resize windows proportionally
- window-divider-default-right-width 1             ; Thin window vertical dividers
- x-stretch-cursor t                               ; Stretch cursor to the glyph width
- echo-keystrokes 0.1                              ; Immediately show keystrokes
- frame-title-format '("Emacs - " user-login-name "@" system-name " - %b") ; Better title name
-)
-(cd "~/")                                         ; Move to the user directory
-(delete-selection-mode 1)                         ; Replace region when inserting text
-(fset 'yes-or-no-p 'y-or-n-p)                     ; Replace yes/no prompts with y/n
-(global-subword-mode 1)                           ; Iterate through CamelCase words
-(menu-bar-mode 0)                                 ; Disable the menu bar
-(mouse-avoidance-mode 'exile)                     ; Avoid collision of mouse with point
-(put 'downcase-region 'disabled nil)              ; Enable downcase-region
-(put 'upcase-region 'disabled nil)                ; Enable upcase-region
-(set-default-coding-systems 'utf-8)               ; Default to utf-8 encoding
+  (setq-default
+   ad-redefinition-action 'accept                   ; Silence warnings for redefinition
+   auto-save-list-file-prefix nil                   ; Prevent tracking for auto-saves
+   cursor-in-non-selected-windows nil               ; Hide the cursor in inactive windows
+   cursor-type 'bar                                 ; Prefer a bar-shaped cursor
+   custom-unlispify-menu-entries nil                ; Prefer kebab-case for titles
+   custom-unlispify-tag-names nil                   ; Prefer kebab-case for symbols
+   delete-by-moving-to-trash t                      ; Delete files to trash
+   fill-column 80                                   ; Set width for automatic line breaks
+   gc-cons-threshold (* 8 1024 1024)                ; We're not using Game Boys anymore
+   help-window-select t                             ; Focus new help windows when opened
+   indent-tabs-mode nil                             ; Stop using tabs to indent
+   inhibit-startup-screen t                         ; Disable start-up screen
+   initial-scratch-message ""                       ; Empty the initial *scratch* buffer
+   mouse-yank-at-point t                            ; Yank at point rather than pointer
+   recenter-positions '(5 top bottom)               ; Set re-centering positions
+   scroll-conservatively most-positive-fixnum       ; Always scroll by one line
+   scroll-margin 2                                  ; Add a margin when scrolling vertically
+   select-enable-clipboard t                        ; Merge system's and Emacs' clipboard
+   sentence-end-double-space nil                    ; Use a single space after dots
+   show-help-function nil                           ; Disable help text everywhere
+   tab-width 4                                      ; Set width for tabs
+   uniquify-buffer-name-style 'forward              ; Uniquify buffer names
+   window-combination-resize t                      ; Resize windows proportionally
+   window-divider-default-right-width 1             ; Thin window vertical dividers
+   x-stretch-cursor t                               ; Stretch cursor to the glyph width
+   echo-keystrokes 0.1                              ; Immediately show keystrokes
+   frame-title-format '("Emacs - " user-login-name "@" system-name " - %b") ; Better title name
+  )
+  (cd "~/")                                         ; Move to the user directory
+  (delete-selection-mode 1)                         ; Replace region when inserting text
+  (fset 'yes-or-no-p 'y-or-n-p)                     ; Replace yes/no prompts with y/n
+  (global-subword-mode 1)                           ; Iterate through CamelCase words
+  (menu-bar-mode 0)                                 ; Disable the menu bar
+  (mouse-avoidance-mode 'exile)                     ; Avoid collision of mouse with point
+  (put 'downcase-region 'disabled nil)              ; Enable downcase-region
+  (put 'upcase-region 'disabled nil)                ; Enable upcase-region
+  (set-default-coding-systems 'utf-8)               ; Default to utf-8 encoding
 #+END_SRC
 
 Some UI elements are rather invasive. No-mouse master race.
@@ -524,6 +524,11 @@ Provides the backbone vertical completion list used by the various completion mo
     ;;;; 4. locate-dominating-file
     ;; (setq consult-project-root-function (lambda () (locate-dominating-file "." ".git")))
   )  
+
+  ;; Turn on recentf-mode to pick recent files in buffer switcher
+  (recentf-mode 1)
+  (setq recentf-max-menu-items 50)
+  (setq recentf-max-saved-items 50)
 #+END_SRC
 *** Embark
 #+BEGIN_SRC emacs-lisp
