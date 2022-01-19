@@ -1234,6 +1234,12 @@ Setup for programming in Python
     :hook (python-mode . pipenv-mode))
 #+END_SRC
 
+*** AHK
+#+BEGIN_SRC emacs-lisp
+  (use-package ahk-mode
+    :ensure t
+    )
+#+END_SRC
 * Org
 ** Org Mode
 #+BEGIN_SRC emacs-lisp
