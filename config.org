@@ -200,15 +200,16 @@ Here are what I consider better defaults as per my own experience.
 Some UI elements are rather invasive. No-mouse master race.
 
 #+BEGIN_SRC emacs-lisp
-(when window-system
-  (blink-cursor-mode 0)                           ; Disable the cursor blinking
-  (fringe-mode '(2 . 0))                          ; Initialize thinner vertical fringes
-  (scroll-bar-mode 0)                             ; Disable the scroll bar
-  (tool-bar-mode 0)                               ; Disable the tool bar
-  (tooltip-mode 0)                                ; Disable the tooltips
-  (window-divider-mode 1)                         ; Disable the tooltips
+  (when window-system
+    (blink-cursor-mode 0)                           ; Disable the cursor blinking
+    (fringe-mode '(2 . 0))                          ; Initialize thinner vertical fringes
+    (scroll-bar-mode 0)                             ; Disable the scroll bar
+    (tool-bar-mode 0)                               ; Disable the tool bar
+    (tooltip-mode 0)                                ; Disable the tooltips
+    (window-divider-mode 1)                         ; Disable the tooltips
+    (global-hl-line-mode 1)                         ; Enable line highlighting globally
 
-  (define-fringe-bitmap 'left-curly-arrow [192] nil nil '(center t)))
+    (define-fringe-bitmap 'left-curly-arrow [192] nil nil '(center t)))
 #+END_SRC
 
 Garbage-collect on focus-out, Emacs /should/ feel snappier overall.
