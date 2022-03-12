@@ -177,7 +177,6 @@ Some UI elements are rather invasive. No-mouse master race.
 #+BEGIN_SRC emacs-lisp
   (when window-system
     (blink-cursor-mode 0)                           ; Disable the cursor blinking
-    (fringe-mode '(2 . 0))                          ; Initialize thinner vertical fringes
     (scroll-bar-mode 0)                             ; Disable the scroll bar
     (tool-bar-mode 0)                               ; Disable the tool bar
     (tooltip-mode 0)                                ; Disable the tooltips
@@ -629,7 +628,12 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
     (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
     (yas-global-mode 1))
 #+END_SRC
-
+** Flycheck
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+#+END_SRC
 ** Custom functions 
 *** Orgzly conflict resolution
 #+BEGIN_SRC emacs-lisp
@@ -754,13 +758,39 @@ File tree mode for project management.
   ;; Hook line numbers to only when files are opened, also use linum-mode for emacs-version< 26
   ;; (if (version< emacs-version "26")
   ;;     (global-linum-mode)
-  ;;   ;;(add-hook 'text-mode-hook #'display-line-numbers-mode)
-  ;;   (add-hook 'prog-mode-hook #'display-line-numbers-mode))
+  (add-hook 'text-mode-hook #'display-line-numbers-mode)
+  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   ;; Display column numbers in modeline
   (column-number-mode 1)
 #+END_SRC
+** LSP
+Language Server support for Emacs.
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-mode
+    :init
+    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+    (setq lsp-keymap-prefix "C-c l")
+    :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+           (python-mode . lsp)
+           ;; if you want which-key integration
+           (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp)
+
+  (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+#+END_SRC
 
 ** Languages
+*** Python
+**** Pipenv
+#+BEGIN_SRC emacs-lisp
+  (use-package pipenv
+    :hook (python-mode . pipenv-mode)
+    :init
+    (setq
+     pipenv-projectile-after-switch-function
+     #'pipenv-projectile-after-switch-extended))
+#+END_SRC
+
 *** AHK
 #+BEGIN_SRC emacs-lisp
   (use-package ahk-mode
