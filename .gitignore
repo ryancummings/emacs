@@ -71,4 +71,5 @@ history
 eln-cache*
 org-roam.db
 
+
 # End of https://www.toptal.com/developers/gitignore/api/emacs
