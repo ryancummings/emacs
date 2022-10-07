@@ -630,9 +630,10 @@ I prefer visual-line-mode to auto-fill, especially in Org where auto-fill could 
 #+END_SRC
 ** Flycheck
 #+BEGIN_SRC emacs-lisp
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
+  (use-package flycheck
+    :ensure t
+    ; :init (global-flycheck-mode)
+  )
 #+END_SRC
 ** Custom functions 
 *** Orgzly conflict resolution
@@ -758,7 +759,7 @@ File tree mode for project management.
   ;; Hook line numbers to only when files are opened, also use linum-mode for emacs-version< 26
   ;; (if (version< emacs-version "26")
   ;;     (global-linum-mode)
-  (add-hook 'text-mode-hook #'display-line-numbers-mode)
+  ;; (add-hook 'text-mode-hook #'display-line-numbers-mode)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   ;; Display column numbers in modeline
   (column-number-mode 1)
@@ -845,6 +846,8 @@ Language Server support for Emacs.
              ("i" "Interesting Case" entry (file+headline "~/org/radiology.org" "Interesting cases")
               "* %^{description} :%^{specialty|msk|body|neuro|peds|chest|ir|breast}:%^{hospital|nyu|bellevue}:\n%u\nMRN: %^{mrn}\nModality: %^{modality|mri|ct|ultrasound|xray|nuclear|mammo|fluoro}\nNotes:\n- %^{Age and sex?}\n- %?" :kill-buffer t
               )
+             ("s" "Slipbox" entry  (file "~/org/Eva/inbox.org")
+              "* %?\n")
              )))
     (org-log-done 'time)
     (add-hook 'org-mode-hook 'org-align-all-tags)
@@ -931,6 +934,44 @@ A nice mode for distraction-free writing.
 #+BEGIN_SRC emacs-lisp
 (use-package olivetti
   :ensure t)
+#+END_SRC
+
+** Org-Roam
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory (file-truename "/home/kubo/org/Eva/"))
+    (org-roam-capture-templates
+     '(("d" "default" plain
+        "%?"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+        :unnarrowed t)
+       ("r" "reference note" plain
+        "\n* Source\nAuthor: %^{Author}\nTitle: ${title}\nLink: %^{Link}\n* Summary\n%?"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+        :unnarrowed t)
+       ))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n g" . org-roam-graph)
+           ("C-c n i" . org-roam-node-insert)
+           ("C-c n c" . org-roam-capture)
+           ("C-c n a" . org-roam-alias-add)
+           ("C-c n I" . org-id-get-create) ; Get an ID for a heading or other org object
+           ;; Dailies
+           ("C-c n j" . org-roam-dailies-capture-today))
+    :config
+    ;; If you're using a vertical completion framework, you might want a more informative completion interface
+    (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+    (org-roam-db-autosync-mode)
+  )
+#+END_SRC
+
+** Org-Cite
+#+BEGIN_SRC emacs-lisp
+  (setq org-cite-global-bibliography '("/home/kubo/org/Eva/biblio.bib"))
+  (setq org-cite-csl-styles-dir "~/Zotero/styles")
 #+END_SRC
 
 * LaTeX
