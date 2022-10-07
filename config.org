@@ -761,6 +761,10 @@ File tree mode for project management.
   ;;     (global-linum-mode)
   ;; (add-hook 'text-mode-hook #'display-line-numbers-mode)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+  (defun nolinum ()
+       (global-linum-mode 0)
+       )
+  (add-hook 'org-mode-hook 'nolinum)
   ;; Display column numbers in modeline
   (column-number-mode 1)
 #+END_SRC
