@@ -946,7 +946,7 @@ Drag-and-drop into org mode (especially useful for pics)
     ; Experimental custom code to add resizing to link annotation 
     (defun ryan/org-download-annotate-resize (link)
       "Annotate LINK with the time of download and with resizing code"
-      (format "#+DOWNLOADED: %s @ %s\n#+attr_html :width 80%%\n"
+      (format "#+DOWNLOADED: %s @ %s\n#+attr_html: :width 80%%\n"
               (if (equal link org-download-screenshot-file)
                   "screenshot"
                 link)
