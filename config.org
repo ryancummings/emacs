@@ -941,12 +941,12 @@ Drag-and-drop into org mode (especially useful for pics)
     ;; Add handlers for drag-and-drop when Org is loaded.
     (with-eval-after-load 'org
       (org-download-enable))
-    (setq org-download-image-dir "~/org/Eva/media")
+    (setq-default org-download-image-dir "~/org/Eva/media")
     (setq org-image-actual-width nil)
     ; Experimental custom code to add resizing to link annotation 
     (defun ryan/org-download-annotate-resize (link)
       "Annotate LINK with the time of download and with resizing code"
-      (format "#+DOWNLOADED: %s @ %s\n#+HTTP_ATTR :width 80%%\n"
+      (format "#+DOWNLOADED: %s @ %s\n#+attr_html :width 80%%\n"
               (if (equal link org-download-screenshot-file)
                   "screenshot"
                 link)
