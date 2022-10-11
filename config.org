@@ -972,14 +972,22 @@ A nice mode for distraction-free writing.
     (require 'consult)
     (org-roam-directory (file-truename "/home/kubo/org/Eva/"))
     (org-roam-capture-templates
-     '(("d" "default" plain
+     '(("m" "main note" plain
         "%?"
-        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :main:\n")
         :unnarrowed t)
-       ("r" "reference note" plain
-        "\n* Source\nAuthor: %^{Author}\nTitle: ${title}\nLink: %^{Link}\n* Summary\n%?"
-        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+       ("t" "technical note" plain
+          "%?"
+          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :technical:\n")
+          :unnarrowed t)
+       ("s" "source/reference note" plain
+        "\n* Source\nAuthor: %^{Author}\nTitle: ${title}\nType: %^{type of media|webpage|cwebpage|youtube|article|book}\nLink: %^{Link}\n* Summary\n%?"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :source:\n")
         :unnarrowed t)
+       ("r" "radiology note" plain
+          "%?"
+          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :radiology:\n")
+          :unnarrowed t)
        ))
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
@@ -987,7 +995,7 @@ A nice mode for distraction-free writing.
            ("C-c n i" . org-roam-node-insert)
            ("C-c n c" . org-roam-capture)
            ("C-c n a" . org-roam-alias-add)
-           ("C-c n I" . org-id-get-create) ; Get an ID for a heading or other org object
+           ("C-c n o" . org-id-get-create) ; Get an ID for a heading or other org object
            ("C-c n t t" . org-roam-tag-add)
            ("C-c n t +" . org-roam-tag-add)
            ("C-c n t -" . org-roam-tag-remove)
@@ -997,7 +1005,10 @@ A nice mode for distraction-free writing.
     ;; If you're using a vertical completion framework, you might want a more informative completion interface
     (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
     (org-roam-db-autosync-mode)
-  )
+    (defun ryan/tag-new-node-as-draft ()
+      (org-roam-tag-add '("draft")))
+    (add-hook 'org-roam-capture-new-node-hook #'ryan/tag-new-node-as-draft)
+    )
 #+END_SRC
 
 ** Org-Cite
