@@ -855,6 +855,8 @@ Language Server support for Emacs.
              )))
     (org-log-done 'time)
     (add-hook 'org-mode-hook 'org-align-all-tags)
+    (setq org-blank-before-new-entry (quote ((heading . nil)
+                                             (plain-list-item . nil))))
     (org-export-backends (quote (ascii html icalendar latex md odt)))
     (org-use-speed-commands t)
     (org-confirm-babel-evaluate 'nil)
@@ -973,11 +975,11 @@ A nice mode for distraction-free writing.
     (org-roam-directory (file-truename "/home/kubo/org/Eva/"))
     (org-roam-capture-templates
      '(("m" "main note" plain
-        "%?"
+        "%?\n* Additional Links:\n"
         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :main:\n")
         :unnarrowed t)
        ("t" "technical note" plain
-          "%?"
+          "%?\n* Additional Links:\n"
           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :technical:\n")
           :unnarrowed t)
        ("s" "source/reference note" plain
@@ -1008,6 +1010,11 @@ A nice mode for distraction-free writing.
     (defun ryan/tag-new-node-as-draft ()
       (org-roam-tag-add '("draft")))
     (add-hook 'org-roam-capture-new-node-hook #'ryan/tag-new-node-as-draft)
+    (setq org-roam-mode-sections
+        (list #'org-roam-backlinks-section
+              #'org-roam-reflinks-section
+              #'org-roam-unlinked-references-section
+              ))
     )
 #+END_SRC
 
