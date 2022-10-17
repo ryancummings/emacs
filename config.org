@@ -987,7 +987,7 @@ A nice mode for distraction-free writing.
         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :source:\n")
         :unnarrowed t)
        ("r" "radiology note" plain
-          "%?"
+          "%?\n* Additional Links:\n"
           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :radiology:\n")
           :unnarrowed t)
        ))
@@ -1015,7 +1015,15 @@ A nice mode for distraction-free writing.
               #'org-roam-reflinks-section
               #'org-roam-unlinked-references-section
               ))
+    (add-to-list 'display-buffer-alist
+             '("\\*org-roam\\*"
+               (display-buffer-in-direction)
+               (direction . right)
+               (window-width . 0.33)
+               (window-height . fit-window-to-buffer)))
+    (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file) ;; Tell org find file to do so in the same window, rather than another window
     )
+
 #+END_SRC
 
 ** Org-Cite
