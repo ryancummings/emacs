@@ -954,6 +954,7 @@ Drag-and-drop into org mode (especially useful for pics)
                 link)
               (format-time-string "%Y-%m-%d %H:%M:%S")))
     (setq org-download-annotate-function #'ryan/org-download-annotate-resize)
+    (setq org-download-screenshot-method "sleep 5s && gnome-screenshot -a -f %s")
     )
 
 
@@ -975,11 +976,11 @@ A nice mode for distraction-free writing.
     (org-roam-directory (file-truename "/home/kubo/org/Eva/"))
     (org-roam-capture-templates
      '(("m" "main note" plain
-        "%?\n* Additional Links:\n"
+        "%?\n* See also:\n"
         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :main:\n")
         :unnarrowed t)
        ("t" "technical note" plain
-          "%?\n* Additional Links:\n"
+          "%?\n* See also:\n"
           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :technical:\n")
           :unnarrowed t)
        ("s" "source/reference note" plain
@@ -987,7 +988,7 @@ A nice mode for distraction-free writing.
         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :source:\n")
         :unnarrowed t)
        ("r" "radiology note" plain
-          "%?\n* Additional Links:\n"
+          "%?\n* See also:\n"
           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :radiology:\n")
           :unnarrowed t)
        ))
