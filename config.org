@@ -987,19 +987,19 @@ A nice mode for distraction-free writing.
     (org-roam-capture-templates
      '(("m" "main note" plain
         "%?\n* See also:\n"
-        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :main:\n")
+        :if-new (file+head "Main/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :main:\n")
         :unnarrowed t)
        ("t" "technical note" plain
           "%?\n* See also:\n"
-          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :technical:\n")
+          :if-new (file+head "Technical/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :technical:\n")
           :unnarrowed t)
        ("s" "source/reference note" plain
         "\n* Source\nAuthor: %^{Author}\nTitle: ${title}\nType: %^{type of media|webpage|cwebpage|youtube|article|book}\nLink: %^{Link}\n* Summary\n%?"
-        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :source:\n")
+        :if-new (file+head "Reference/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :source:\n")
         :unnarrowed t)
        ("r" "radiology note" plain
           "%?\n* See also:\n"
-          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :radiology:\n")
+          :if-new (file+head "Radiology/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :radiology:\n")
           :unnarrowed t)
        ))
     :bind (("C-c n l" . org-roam-buffer-toggle)
